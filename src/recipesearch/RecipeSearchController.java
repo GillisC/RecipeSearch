@@ -52,26 +52,20 @@ public class RecipeSearchController implements Initializable {
 
         /* Initiate main ingredient menu */
         mainIngredientComboBox.getItems().addAll("Kött", "Fisk", "Kyckling", "Vegetariskt");
-        mainIngredientComboBox.getSelectionModel().select("Kött");
+        mainIngredientComboBox.getSelectionModel().select("Välj huvudingrediens");
 
-        mainIngredientComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                recipeController.setMainIngredient(newValue);
-                updateRecipeList();
-            }
+        mainIngredientComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            recipeController.setMainIngredient(newValue);
+            updateRecipeList();
         });
 
         /* Initiate cuisine selection menu */
         cuisineComboBox.getItems().addAll("Sverige", "Grekland", "Indien", "Asien", "Afrika", "Frankrike");
-        cuisineComboBox.getSelectionModel().select("Sverige");
+        cuisineComboBox.getSelectionModel().select("Välj kök");
 
-        cuisineComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                recipeController.setCuisine(newValue);
-                updateRecipeList();
-            }
+        cuisineComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            recipeController.setCuisine(newValue);
+            updateRecipeList();
         });
 
         /* Initiate difficulty buttons */
@@ -82,46 +76,41 @@ public class RecipeSearchController implements Initializable {
         difficultyHardRadioButton.setToggleGroup(toggleGroup);
         difficultyAllRadioButton.setSelected(true);
 
-        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
 
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-
-                if (toggleGroup.getSelectedToggle() != null) {
-                    RadioButton selected = (RadioButton) toggleGroup.getSelectedToggle();
-                    recipeController.setDifficulty(selected.getText());
-                    updateRecipeList();
-                }
-            }
-        });
-
-        /* Initiate max price spinner */
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(50, 50000, 200, 50);
-        maxPriceSpinner.setValueFactory(valueFactory);
-
-        maxPriceSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
-            @Override
-            public void changed(ObservableValue<? extends Integer> observableValue, Integer oldValue, Integer newValue) {
-                recipeController.setMaxPrice(newValue);
+            if (toggleGroup.getSelectedToggle() != null) {
+                RadioButton selected = (RadioButton) toggleGroup.getSelectedToggle();
+                recipeController.setDifficulty(selected.getText());
                 updateRecipeList();
             }
         });
 
-        maxPriceSpinner.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        /* Initiate max price spinner */
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 10000, 50, 10);
+        maxPriceSpinner.setValueFactory(valueFactory);
 
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        maxPriceSpinner.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            recipeController.setMaxPrice(newValue);
+            updateRecipeList();
+        });
 
-                if(newValue){
-                    //focusgained - do nothing
-                }
-                else{
+        maxPriceSpinner.focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+            if(newValue){
+                //focusgained - do nothing
+            }
+            else{
+                try {
                     int value = Integer.parseInt(maxPriceSpinner.getEditor().getText());
                     recipeController.setMaxPrice(value);
                     updateRecipeList();
+                } catch (NumberFormatException e) {
+                    maxPriceSpinner.getValueFactory().setValue(10);
+                    recipeController.setMaxPrice(10);
+                    updateRecipeList();
                 }
-
             }
+
         });
 
         maxTimeSlider.setMin(10);
@@ -132,27 +121,25 @@ public class RecipeSearchController implements Initializable {
         maxTimeSlider.setSnapToTicks(true);
 
         /* Checks continuously for updates to the slider */
-        maxTimeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                String output = String.format("%s minutes", newValue.intValue());
-                maxTimeSliderLabel.textProperty().setValue(output);
+        maxTimeSlider.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            String output = String.format("%s minutes", newValue.intValue());
+            maxTimeSliderLabel.textProperty().setValue(output);
 
-                if(!newValue.equals(oldValue) && !maxTimeSlider.isValueChanging()) {
-                    recipeController.setMaxTime(newValue.intValue());
-                    updateRecipeList();
-                }
+            if(!newValue.equals(oldValue) && !maxTimeSlider.isValueChanging()) {
+                recipeController.setMaxTime(newValue.intValue());
+                updateRecipeList();
             }
         });
 
-        //updateRecipeList();
+        updateRecipeList();
 
     }
 
     private void updateRecipeList() {
         recipeListFlowPane.getChildren().clear();
         for (Recipe r: recipeController.getRecipes()) {
-            RecipeListItem listItem = recipeListItemMap.get(r.getName());
+            RecipeListItem listItem;
+            listItem = recipeListItemMap.get(r.getName());
             recipeListFlowPane.getChildren().add(listItem);
         }
 

@@ -19,6 +19,7 @@ public class RecipeListItem extends AnchorPane {
 
     @FXML private Label recipeListLabel;
     @FXML private ImageView recipeListImageView;
+    @FXML private Label recipeListPriceLabel;
 
 
     public RecipeListItem(Recipe recipe, RecipeSearchController recipeSearchController) {
@@ -36,6 +37,8 @@ public class RecipeListItem extends AnchorPane {
         this.parentController = recipeSearchController;
         this.recipeListImageView.setImage(recipe.getFXImage());
         this.recipeListLabel.setText(recipe.getName());
+        this.recipeListPriceLabel.setText(String.format("%s:-", recipe.getPrice()));
+
     }
 
     @FXML
