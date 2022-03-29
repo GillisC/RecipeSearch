@@ -12,6 +12,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -26,6 +27,7 @@ public class RecipeSearchController implements Initializable {
     private RecipeBackendController recipeController;
     private ToggleGroup toggleGroup;
 
+    @FXML private StackPane searchViewStackPane;
     @FXML private FlowPane recipeListFlowPane;
     @FXML private ComboBox<String> mainIngredientComboBox;
     @FXML private ComboBox<String> cuisineComboBox;
@@ -38,7 +40,9 @@ public class RecipeSearchController implements Initializable {
     @FXML private Label maxTimeSliderLabel;
 
     @FXML private AnchorPane detailedViewAnchorPane;
-    @FXML private StackPane searchViewStackPane;
+    @FXML private ImageView detailedViewImageView;
+    @FXML private Label detailedViewTitleLabel;
+
 
 
     @Override
@@ -152,6 +156,8 @@ public class RecipeSearchController implements Initializable {
     public void openRecipeView(Recipe recipe) {
         //populateRecipeDetailView(recipe);
         detailedViewAnchorPane.toFront();
+        detailedViewImageView.setImage(recipe.getFXImage());
+        detailedViewTitleLabel.setText(recipe.getName());
     }
 
 }
