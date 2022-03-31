@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root onMouseClicked="#onClick" prefHeight="100.0" prefWidth="495.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="100.0" maxWidth="495.0" onMouseClicked="#onClick" prefHeight="100.0" prefWidth="495.0" styleClass="recipe-list-item" stylesheets="@recipe_search.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="recipeListImageView" fitHeight="100.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="recipeListLabel" layoutX="135.0" layoutY="14.0" prefHeight="17.0" prefWidth="355.0" text="Title" />
-      <Label fx:id="recipeListPriceLabel" alignment="CENTER_RIGHT" layoutX="377.0" layoutY="69.0" prefHeight="17.0" prefWidth="104.0" text="Price" />
+      <ImageView fx:id="recipeListImageView" fitHeight="98.0" fitWidth="98.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" styleClass="image-border" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="399.0" AnchorPane.topAnchor="4.0">
+         <image>
+            <Image url="@resources/icon_flag_sweden.png" />
+         </image></ImageView>
+      <Label fx:id="recipeListTitleLabel" layoutX="108.0" layoutY="5.0" prefHeight="17.0" prefWidth="300.0" styleClass="text-title-smaller" text="Title" />
+      <Label fx:id="recipeListPriceLabel" alignment="CENTER_RIGHT" layoutX="284.0" layoutY="36.0" prefHeight="17.0" prefWidth="28.0" styleClass="text-smaller" text="Price" />
+      <ImageView fx:id="recipeListItemMainImageView" fitHeight="16.0" fitWidth="16.0" layoutX="112.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/icon_main_chicken.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="recipeListItemDifficultyImageView" fitHeight="16.0" fitWidth="50.0" layoutX="145.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/icon_difficulty_hard.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="recipeListItemTimeLabel" layoutX="212.0" layoutY="36.0" styleClass="text-smaller" text="Tid" />
+      <Label fx:id="recipeListItemDescriptionLabel" layoutX="114.0" layoutY="58.0" prefHeight="37.0" prefWidth="384.0" styleClass="text-description" text="Label" wrapText="true" />
    </children>
 </fx:root>

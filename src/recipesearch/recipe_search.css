@@ -1,2 +1,87 @@
 
+.text-normal {
+    -fx-font-size: 13px;
+    -fx-font-family: "Avenir Book<";
+}
+
+.text-normal-bold {
+    -fx-font-size: 13px;
+    -fx-font-family: "Avenir Book<";
+    -fx-font-weight: bold;
+}
+
+.text-larger {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Avenir Book<";
+    -fx-text-fill: #262626;
+}
+.text-smaller {
+    -fx-font-size: 12px;
+    -fx-font-family: "Avenir Book<";
+}
+
+#logo {
+    -fx-font-size: 48px;
+    -fx-font-family: "Bauhaus 93";
+}
+
+#logo-swirl {
+    -fx-font-size: 64px;
+    -fx-font-family: "Brush Script MT";
+    -fx-text-fill: #FFAC33;
+    -fx-rotate: -20;
+}
+
+.recipe-list-item {
+    -fx-border-color: gray;
+    -fx-border-width: 1;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
+    -fx-background-color: #e5e5e5;
+}
+
+.image-border {
+    -fx-border-color: gray;
+    -fx-border-width: 1;
+    -fx-border-radius: 1;
+}
+
+.text-title-smaller {
+    -fx-font-size: 20px;
+    -fx-font-family: "Avenir Book<";
+    -fx-text-fill: #262626;
+}
+
+.text-description {
+    -fx-font-size: 11px;
+    -fx-font-family: "Avenir Book<";
+    -fx-text-fill: #262626;
+}
+
+.recipe-list-item:hover {
+    -fx-background-color: #FCFCFC;
+}
+
+.search-background {
+    -fx-background-color: #d1d1d1;
+}
+
+.controls {
+
+}
+
+.controls:pressed {
+    -fx-background-color: #D0D0D0;
+}
+
+.text-area .content {
+    -fx-background-color: -fx-background;
+}
+
+.text-area  {
+    -fx-background-color: -fx-background;
+}
+
+
 
